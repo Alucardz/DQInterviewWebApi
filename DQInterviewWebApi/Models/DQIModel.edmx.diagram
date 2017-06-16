@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88c7d02670bf42019befacdbdfa8b7de" Name="Diagram1" ZoomLevel="68">
+        <EntityTypeShape EntityType="DQIDataModel.Category" Width="1.5" PointX="0.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DQIDataModel.Question" Width="1.5" PointX="2.875" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="DQIDataModel.CategoryQuestion" />
+        <EntityTypeShape EntityType="DQIDataModel.Interview" Width="1.5" PointX="5.375" PointY="0.625" />
+        <EntityTypeShape EntityType="DQIDataModel.Applicant" Width="1.625" PointX="8" PointY="0.5" />
+        <AssociationConnector Association="DQIDataModel.InterviewApplicant" />
+        <EntityTypeShape EntityType="DQIDataModel.Answers" Width="1.5" PointX="5.5" PointY="4.125" />
+        <AssociationConnector Association="DQIDataModel.AnswersQuestion" />
+        <AssociationConnector Association="DQIDataModel.AnswersInterview" />
+        <EntityTypeShape EntityType="DQIDataModel.JobOpening" Width="1.5" PointX="8" PointY="4.875" />
+        <EntityTypeShape EntityType="DQIDataModel.Questionnaire" Width="1.5" PointX="8" PointY="2.625" />
+        <AssociationConnector Association="DQIDataModel.QuestionnaireJobOpening" />
+        <AssociationConnector Association="DQIDataModel.InterviewQuestionnaire" />
+        <AssociationConnector Association="DQIDataModel.QuestionnaireQuestion" />
+        <EntityTypeShape EntityType="DQIDataModel.User" Width="1.5" PointX="2.875" PointY="0.5" />
+        <AssociationConnector Association="DQIDataModel.EmployeeInterview" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

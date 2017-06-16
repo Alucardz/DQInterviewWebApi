@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DQIDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DQIDataModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="DQIDataModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Questions" EntityType="DQIDataModel.Store.Questions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Interviews" EntityType="DQIDataModel.Store.Interviews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Applicants" EntityType="DQIDataModel.Store.Applicants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Answers" EntityType="DQIDataModel.Store.Answers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobOpenings" EntityType="DQIDataModel.Store.JobOpenings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Questionnaires" EntityType="DQIDataModel.Store.Questionnaires" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="DQIDataModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CategoryQuestion" Association="DQIDataModel.Store.CategoryQuestion">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="InterviewApplicant" Association="DQIDataModel.Store.InterviewApplicant">
+      <End Role="Interview" EntitySet="Interviews" />
+      <End Role="Applicant" EntitySet="Applicants" />
+    </AssociationSet>
+    <AssociationSet Name="AnswersQuestion" Association="DQIDataModel.Store.AnswersQuestion">
+      <End Role="Answers" EntitySet="Answers" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="AnswersInterview" Association="DQIDataModel.Store.AnswersInterview">
+      <End Role="Answers" EntitySet="Answers" />
+      <End Role="Interview" EntitySet="Interviews" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionnaireJobOpening" Association="DQIDataModel.Store.QuestionnaireJobOpening">
+      <End Role="Questionnaire" EntitySet="Questionnaires" />
+      <End Role="JobOpening" EntitySet="JobOpenings" />
+    </AssociationSet>
+    <AssociationSet Name="InterviewQuestionnaire" Association="DQIDataModel.Store.InterviewQuestionnaire">
+      <End Role="Interview" EntitySet="Interviews" />
+      <End Role="Questionnaire" EntitySet="Questionnaires" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionnaireQuestion" Association="DQIDataModel.Store.QuestionnaireQuestion">
+      <End Role="Questionnaire" EntitySet="Questionnaires" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    </EntityContainer>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionText" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="badAnswer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="neutralAnswer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="goodAnswer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="excellentAnswer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="QuestionnaireId" Type="int" Nullable="false" />
+    <Property Name="Category_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Interviews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeOfInterview" Type="datetime" Nullable="false" />
+    <Property Name="Applicant_Id" Type="int" Nullable="false" />
+    <Property Name="Questionnaire_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Applicants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Answers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AnswerIndex" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Question_Id" Type="int" Nullable="false" />
+    <Property Name="Interview_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobOpenings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Questionnaires">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobOpening_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CategoryQuestion">
+    <End Role="Category" Type="DQIDataModel.Store.Categories" Multiplicity="1" />
+    <End Role="Question" Type="DQIDataModel.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InterviewApplicant">
+    <End Role="Interview" Type="DQIDataModel.Store.Interviews" Multiplicity="*" />
+    <End Role="Applicant" Type="DQIDataModel.Store.Applicants" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Applicant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Interview">
+        <PropertyRef Name="Applicant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnswersQuestion">
+    <End Role="Answers" Type="DQIDataModel.Store.Answers" Multiplicity="*" />
+    <End Role="Question" Type="DQIDataModel.Store.Questions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="Question_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnswersInterview">
+    <End Role="Answers" Type="DQIDataModel.Store.Answers" Multiplicity="*" />
+    <End Role="Interview" Type="DQIDataModel.Store.Interviews" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Interview">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="Interview_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionnaireJobOpening">
+    <End Role="Questionnaire" Type="DQIDataModel.Store.Questionnaires" Multiplicity="*" />
+    <End Role="JobOpening" Type="DQIDataModel.Store.JobOpenings" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="JobOpening">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questionnaire">
+        <PropertyRef Name="JobOpening_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InterviewQuestionnaire">
+    <End Role="Interview" Type="DQIDataModel.Store.Interviews" Multiplicity="*" />
+    <End Role="Questionnaire" Type="DQIDataModel.Store.Questionnaires" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Questionnaire">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Interview">
+        <PropertyRef Name="Questionnaire_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionnaireQuestion">
+    <End Role="Questionnaire" Type="DQIDataModel.Store.Questionnaires" Multiplicity="1" />
+    <End Role="Question" Type="DQIDataModel.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questionnaire">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="QuestionnaireId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DQIDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Questions" Relationship="DQIDataModel.CategoryQuestion" FromRole="Category" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="DQIDataModel.CategoryQuestion" FromRole="Question" ToRole="Category" />
+          <Property Name="badAnswer" Type="String" Nullable="false" />
+          <Property Name="neutralAnswer" Type="String" Nullable="false" />
+          <Property Name="goodAnswer" Type="String" Nullable="false" />
+          <Property Name="excellentAnswer" Type="String" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="DQIDataModel.AnswersQuestion" FromRole="Question" ToRole="Answers" />
+          <NavigationProperty Name="Questionnaire" Relationship="DQIDataModel.QuestionnaireQuestion" FromRole="Question" ToRole="Questionnaire" />
+          <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DQIDataEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <AssociationSet Name="CategoryQuestion" Association="DQIDataModel.CategoryQuestion">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <EntitySet Name="Interviews" EntityType="DQIDataModel.Interview" />
+          <EntitySet Name="Applicants" EntityType="DQIDataModel.Applicant" />
+          <AssociationSet Name="InterviewApplicant" Association="DQIDataModel.InterviewApplicant">
+            <End Role="Interview" EntitySet="Interviews" />
+            <End Role="Applicant" EntitySet="Applicants" />
+          </AssociationSet>
+          <EntitySet Name="Answers" EntityType="DQIDataModel.Answers" />
+          <AssociationSet Name="AnswersQuestion" Association="DQIDataModel.AnswersQuestion">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="AnswersInterview" Association="DQIDataModel.AnswersInterview">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="Interview" EntitySet="Interviews" />
+          </AssociationSet>
+          <EntitySet Name="JobOpenings" EntityType="DQIDataModel.JobOpening" />
+          <EntitySet Name="Questionnaires" EntityType="DQIDataModel.Questionnaire" />
+          <AssociationSet Name="QuestionnaireJobOpening" Association="DQIDataModel.QuestionnaireJobOpening">
+            <End Role="Questionnaire" EntitySet="Questionnaires" />
+            <End Role="JobOpening" EntitySet="JobOpenings" />
+          </AssociationSet>
+          <AssociationSet Name="InterviewQuestionnaire" Association="DQIDataModel.InterviewQuestionnaire">
+            <End Role="Interview" EntitySet="Interviews" />
+            <End Role="Questionnaire" EntitySet="Questionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionnaireQuestion" Association="DQIDataModel.QuestionnaireQuestion">
+            <End Role="Questionnaire" EntitySet="Questionnaires" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="DQIDataModel.User" />
+          <AssociationSet Name="UserInterview" Association="DQIDataModel.UserInterview">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Interview" EntitySet="Interviews" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="CategoryQuestion">
+          <End Type="DQIDataModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="DQIDataModel.Question" Role="Question" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Interview">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Applicant" Relationship="DQIDataModel.InterviewApplicant" FromRole="Interview" ToRole="Applicant" />
+          <NavigationProperty Name="Answers" Relationship="DQIDataModel.AnswersInterview" FromRole="Interview" ToRole="Answers" />
+          <Property Name="TimeOfInterview" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Questionnaire" Relationship="DQIDataModel.InterviewQuestionnaire" FromRole="Interview" ToRole="Questionnaire" />
+          <NavigationProperty Name="Users" Relationship="DQIDataModel.UserInterview" FromRole="Interview" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Applicant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Interview" Relationship="DQIDataModel.InterviewApplicant" FromRole="Applicant" ToRole="Interview" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="InterviewApplicant">
+          <End Type="DQIDataModel.Interview" Role="Interview" Multiplicity="*" />
+          <End Type="DQIDataModel.Applicant" Role="Applicant" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Question" Relationship="DQIDataModel.AnswersQuestion" FromRole="Answers" ToRole="Question" />
+          <Property Name="AnswerIndex" Type="String" Nullable="false" />
+          <Property Name="Comment" Type="String" Nullable="false" />
+          <NavigationProperty Name="Interview" Relationship="DQIDataModel.AnswersInterview" FromRole="Answers" ToRole="Interview" />
+        </EntityType>
+        <Association Name="AnswersQuestion">
+          <End Type="DQIDataModel.Answers" Role="Answers" Multiplicity="*" />
+          <End Type="DQIDataModel.Question" Role="Question" Multiplicity="1" />
+        </Association>
+        <Association Name="AnswersInterview">
+          <End Type="DQIDataModel.Answers" Role="Answers" Multiplicity="*" />
+          <End Type="DQIDataModel.Interview" Role="Interview" Multiplicity="1" />
+        </Association>
+        <EntityType Name="JobOpening">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitle" Type="String" Nullable="false" />
+          <NavigationProperty Name="Questionnaire" Relationship="DQIDataModel.QuestionnaireJobOpening" FromRole="JobOpening" ToRole="Questionnaire" />
+        </EntityType>
+        <EntityType Name="Questionnaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="JobOpening" Relationship="DQIDataModel.QuestionnaireJobOpening" FromRole="Questionnaire" ToRole="JobOpening" />
+          <NavigationProperty Name="Interview" Relationship="DQIDataModel.InterviewQuestionnaire" FromRole="Questionnaire" ToRole="Interview" />
+          <NavigationProperty Name="Questions" Relationship="DQIDataModel.QuestionnaireQuestion" FromRole="Questionnaire" ToRole="Question" />
+        </EntityType>
+        <Association Name="QuestionnaireJobOpening">
+          <End Type="DQIDataModel.Questionnaire" Role="Questionnaire" Multiplicity="1" />
+          <End Type="DQIDataModel.JobOpening" Role="JobOpening" Multiplicity="1" />
+        </Association>
+        <Association Name="InterviewQuestionnaire">
+          <End Type="DQIDataModel.Interview" Role="Interview" Multiplicity="1" />
+          <End Type="DQIDataModel.Questionnaire" Role="Questionnaire" Multiplicity="1" />
+        </Association>
+        <Association Name="QuestionnaireQuestion">
+          <End Type="DQIDataModel.Questionnaire" Role="Questionnaire" Multiplicity="1" />
+          <End Type="DQIDataModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionnaireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="BambooId" />
+          </Key>
+          <Property Name="BambooId" Type="Int16" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Interviews" Relationship="DQIDataModel.UserInterview" FromRole="User" ToRole="Interview" />
+        </EntityType>
+        <Association Name="UserInterview">
+          <End Type="DQIDataModel.User" Role="User" Multiplicity="*" />
+          <End Type="DQIDataModel.Interview" Role="Interview" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DQIDataModelStoreContainer" CdmEntityContainer="DQIDataEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Question)">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="badAnswer" ColumnName="badAnswer" />
+          <ScalarProperty Name="neutralAnswer" ColumnName="neutralAnswer" />
+          <ScalarProperty Name="goodAnswer" ColumnName="goodAnswer" />
+          <ScalarProperty Name="excellentAnswer" ColumnName="excellentAnswer" />
+          <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Interviews">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Interview)">
+        <MappingFragment StoreEntitySet="Interviews">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TimeOfInterview" ColumnName="TimeOfInterview" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applicants">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Applicant)">
+        <MappingFragment StoreEntitySet="Applicants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Answers)">
+        <MappingFragment StoreEntitySet="Answers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AnswerIndex" ColumnName="AnswerIndex" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOpenings">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.JobOpening)">
+        <MappingFragment StoreEntitySet="JobOpenings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questionnaires">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.Questionnaire)">
+        <MappingFragment StoreEntitySet="Questionnaires">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(DQIDataModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DisplayName" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CategoryQuestion" TypeName="DQIDataModel.CategoryQuestion" StoreEntitySet="Questions">
+      <EndProperty Name="Category">
+        <ScalarProperty Name="Id" ColumnName="Category_Id" />
+      </EndProperty>
+      <EndProperty Name="Question">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="InterviewApplicant" TypeName="DQIDataModel.InterviewApplicant" StoreEntitySet="Interviews">
+      <EndProperty Name="Applicant">
+        <ScalarProperty Name="Id" ColumnName="Applicant_Id" />
+      </EndProperty>
+      <EndProperty Name="Interview">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AnswersQuestion" TypeName="DQIDataModel.AnswersQuestion" StoreEntitySet="Answers">
+      <EndProperty Name="Question">
+        <ScalarProperty Name="Id" ColumnName="Question_Id" />
+      </EndProperty>
+      <EndProperty Name="Answers">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AnswersInterview" TypeName="DQIDataModel.AnswersInterview" StoreEntitySet="Answers">
+      <EndProperty Name="Interview">
+        <ScalarProperty Name="Id" ColumnName="Interview_Id" />
+      </EndProperty>
+      <EndProperty Name="Answers">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="QuestionnaireJobOpening" TypeName="DQIDataModel.QuestionnaireJobOpening" StoreEntitySet="Questionnaires">
+      <EndProperty Name="JobOpening">
+        <ScalarProperty Name="Id" ColumnName="JobOpening_Id" />
+      </EndProperty>
+      <EndProperty Name="Questionnaire">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="InterviewQuestionnaire" TypeName="DQIDataModel.InterviewQuestionnaire" StoreEntitySet="Interviews">
+      <EndProperty Name="Questionnaire">
+        <ScalarProperty Name="Id" ColumnName="Questionnaire_Id" />
+      </EndProperty>
+      <EndProperty Name="Interview">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
