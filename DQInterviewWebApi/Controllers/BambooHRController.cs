@@ -14,7 +14,7 @@ namespace DQInterviewWebApi.Controllers
     [EnableCors(origins: "http://localhost:8100", headers: "*", methods: "*")]
     public class BambooHRController : ApiController
     {
-        string __APIKEY = "1d0a56d875b115ff4c213582290776694749e216";
+        string __APIKEY = "xxx";
         string __DQSUBDOMAIN = "dataquest";
         public static BambooAPIClient __API;
         private object ResultCode;
